@@ -34,7 +34,8 @@ class Facturacion:
 
     def generar_factura(self):
         try:
-            with open(f"{self.id_pedido}_factura.txt", 'w', encoding='utf-8') as file:
+            factura_nombre = f"{self.id_pedido}_{self.fecha.strftime('%Y%m%d_%H%M%S')}_factura.txt"
+            with open(factura_nombre, 'w', encoding='utf-8') as file:
                 file.write("="* 40 + "\n")
                 file.write(f"Factura del restaurante {self.info_restaurante}\n")
                 file.write(f"Fecha: {self.fecha.strftime('%d/%m/%Y')}\n")
