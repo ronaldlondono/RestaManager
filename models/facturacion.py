@@ -8,13 +8,13 @@ class Producto:
         self.cantidad = cantidad
 
 class Facturacion:
-    def __init__(self, info_restaurante,propina = 0, iva = 0):
+    def __init__(self, info_restaurante,propina = 0):
         self.info_restaurante = info_restaurante
         self.id_pedido = 0
         self.detalle_pedido = []
         self.propina = propina
         self.fecha = datetime.now()
-        self.iva = iva
+        self.iva = 19 # IVA en Colombia es del 19%
 
     def obtener_pedidos(self, archivo):
         try:
@@ -52,9 +52,11 @@ class Facturacion:
                 if self.propina > 0:
                     file.write(f"{'Propina':<50} {self.propina:<10}\n")
                     total += self.propina
-                if self.iva > 0:
-                    file.write(f"{'IVA':<50} {self.iva:<10}\n")
-                    total += self.iva
+                #IVA
+                iva_calculado = (total * self.iva) / 100
+                file.write(f"{'IVA ('+str(self.iva)+'%)':<50} {iva_calculado:<10}\n")
+                total += iva_calculado
+                #Total
                 file.write("="* 40 + "\n")
                 file.write(f"{'Total a pagar':<50} {total:<10}\n")
                 file.write("="* 40 + "\n")
