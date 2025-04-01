@@ -1,0 +1,41 @@
+{% extends "base.html" %} {% block content %}
+<div class="container mt-5">
+  <div class="card reporte-container">
+    <div class="card-body">
+      <h2 class="text-center mb-4">Reporte General de Facturas</h2>
+      <p class="text-end">Fecha: {{ now.strftime("%d/%m/%Y %H:%M:%S") }}</p>
+
+      <table class="table table-striped">
+        <thead class="table-primary">
+          <tr>
+            <th>ID Factura</th>
+            <th>Restaurante</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for factura in facturas %}
+          <tr>
+            <td>{{ factura.id_pedido }}</td>
+            <td>{{ factura.info_restaurante.nombre }}</td>
+            <td>${{ factura.total() | colombian_currency }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+        <tfoot>
+          <tr class="table-dark">
+            <th colspan="2" class="text-end">Total General:</th>
+            <th>${{ total_general | colombian_currency }}</th>
+          </tr>
+        </tfoot>
+      </table>
+
+      <div class="text-end mt-4">
+        <button class="btn btn-secondary" onclick="window.print()">
+          <i class="fas fa-print"></i> Imprimir Reporte
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "base.html" %} {% block content %}
+<div class="card">
+  <div class="card-header d-flex justify-content-between">
+    <h3 class="card-title">Listado de Facturas</h3>
+    <a href="/ver_reporte" class="btn btn-warning">
+      <i class="fas fa-file-alt"></i> Generar Reporte General
+    </a>
+  </div>
+  <div class="card-body">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Restaurante</th>
+          <th>Fecha</th>
+          <th>Total</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for factura in facturas %}
+        <tr>
+          <td>{{ factura.id_pedido }}</td>
+          <td>{{ factura.info_restaurante.nombre }}</td>
+          <td>{{ factura.fecha.strftime("%d/%m/%Y %H:%M") }}</td>
+          <td>${{ factura.total() | colombian_currency }}</td>
+          <td>
+            <div class="btn-group">
+              <a
+                href="/ver_factura/{{ factura.id_pedido }}"
+                class="btn btn-info btn-sm"
+              >
+                <i class="fas fa-download"></i> Ver Detalle
+              </a>
+            </div>
+          </td>
+        </tr>
+        <!-- Modal de Detalle (sin cambios) -->
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends "base.html" %} {% block content %}
+<div class="container mt-5">
+  <div class="card factura-container">
+    <div class="card-body">
+      <h2 class="text-center mb-4">Factura del Restaurante</h2>
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <h5>{{ factura.info_restaurante.nombre }}</h5>
+          <p>
+            {{ factura.info_restaurante.direccion }}<br />
+            Tel: {{ factura.info_restaurante.telefono }}
+          </p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <p>
+            Fecha: {{ factura.fecha.strftime("%d/%m/%Y %H:%M:%S") }}<br />
+            Factura ID: {{ factura.id_pedido }}
+          </p>
+        </div>
+      </div>
+
+      <table class="table table-bordered">
+        <thead class="table-dark">
+          <tr>
+            <th>Producto</th>
+            <th>Precio Unitario</th>
+            <th>Cantidad</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in factura.detalle_pedido %}
+          <tr>
+            <td>{{ item.nombre }}</td>
+            <td>${{ item.precio | colombian_currency }}</td>
+            <td>{{ item.cantidad }}</td>
+            <td>${{ item.calcular_total() | colombian_currency }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <div class="row mt-4">
+        <div class="col-md-6">
+          <button class="btn btn-secondary" onclick="window.print()">
+            <i class="fas fa-print"></i> Imprimir
+          </button>
+        </div>
+        <div class="col-md-6 text-end">
+          <div class="totales">
+            <p>
+              Sub Total: ${{ factura.calcular_subtotal() | colombian_currency }}
+            </p>
+            <p>
+              Propina ({{ "%.0f"|format(factura.propina * 100) }}%): ${{
+              factura.calcular_propina() | colombian_currency }}
+            </p>
+            <p>IVA (19%): ${{ factura.calcular_iva() | colombian_currency }}</p>
+            <h4>Total a Pagar: ${{ factura.total() | colombian_currency }}</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
