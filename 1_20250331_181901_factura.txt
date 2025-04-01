@@ -1,0 +1,16 @@
+========================================
+Factura del restaurante Restaurante XYZ
+Fecha: 31/03/2025
+========================================
+Producto             Tipo                 Precio     Cantidad   Total     
+========================================
+Coca Cola            bebida               1.5        1          1.5       
+Hamburguesa          plato fuerte         5.0        3          15.0      
+Papas Fritas         entrada              2.0        5          10.0      
+========================================
+Sub Total                                          26.5      
+Propina                                            10        
+IVA (19%)                                          6.935     
+========================================
+Total a pagar                                      43.435    
+========================================

@@ -1,5 +1,7 @@
 from models.facturacion import Facturacion
+from models.reporte import Reporte
 
 facturacion = Facturacion("Restaurante XYZ", 10)
-facturacion.obtener_pedidos("pedidos.json")
-facturacion.generar_factura()
+reporte = Reporte()
+reporte.procesar_facturas()
+reporte.generar_reporte()

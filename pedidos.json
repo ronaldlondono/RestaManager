@@ -1,0 +1,23 @@
+{
+  "id": 1,
+  "productos": [
+    {
+      "nombre": "Coca Cola",
+      "tipo": "bebida",
+      "precio": 1.5,
+      "cantidad": 1
+    },
+    {
+      "nombre": "Hamburguesa",
+      "tipo": "plato fuerte",
+      "precio": 5.0,
+      "cantidad": 3
+    },
+    {
+      "nombre": "Papas Fritas",
+      "tipo": "entrada",
+      "precio": 2.0,
+      "cantidad": 5
+    }
+  ]
+}
